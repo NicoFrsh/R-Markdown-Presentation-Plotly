@@ -1,0 +1,30 @@
+---
+title: "Course Project 3"
+author: "Nico Frisch"
+date: "12 8 2020"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Plotly
+
+```{r, echo=FALSE,message=FALSE, warning=FALSE}
+suppressPackageStartupMessages(library(plotly))
+data(mtcars)
+suppressPackageStartupMessages(library(ggplot2))
+am.labs <- c("Automatic","Manual")
+names(am.labs) <- c("0","1")
+mtcars$cyl <- as.factor(mtcars$cyl)
+gg <- ggplot(data = mtcars, aes(x = hp, y = mpg)) +
+        geom_point(aes(colour = cyl)) +
+        geom_smooth(se = FALSE, method = "lm") + facet_wrap(~am, labeller = labeller(am = am.labs)) +
+        ggtitle("Horsepower vs. Miles Per Gallon using mtcars data") + 
+        xlab("Horsepower") + ylab("Miles Per Gallon")
+ggplotly(gg)
+```
+
+***
+Thanks for Your atention!
